@@ -204,7 +204,7 @@
     <h1>Mein eigener Minecraft Client.</h1>
     <p class="lead">Coole Client Free</p>
     <div class="cta" id="download">
-      <a class="btn btn-main btn-big" href="https://github.com/nexsnus/NovusClient/releases/latest" data-download>
+      <a class="btn btn-main btn-big" href="https://github.com/nexsnus/NovusClient/releases/download/setup/NovusClient-Setup.exe" data-download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
         Für Windows herunterladen
       </a>
@@ -247,7 +247,7 @@
     <div class="final">
       <img src="img/icon.png" alt="">
       <div class="cta">
-        <a class="btn btn-main btn-big" href="https://github.com/nexsnus/NovusClient/releases/latest" data-download>Jetzt herunterladen</a>
+        <a class="btn btn-main btn-big" href="https://github.com/nexsnus/NovusClient/releases/download/setup/NovusClient-Setup.exe" data-download>Jetzt herunterladen</a>
       </div>
     </div>
   </div>
@@ -260,30 +260,5 @@
   </div>
 </footer>
 
-<script>
-  const REPO = "nexsnus/NovusClient";
-  const VIRUSTOTAL_URL = "";
-
-  fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
-    .then(r => r.ok ? r.json() : Promise.reject(r.status))
-    .then(rel => {
-      const exe = (rel.assets || []).find(a => a.name.toLowerCase().endsWith(".exe"));
-      if (!exe) return;
-      const version = (rel.tag_name || "").replace(/^v/, "");
-      const mb = Math.round(exe.size / 1024 / 1024);
-      document.querySelectorAll("[data-download]").forEach(a => a.href = exe.browser_download_url);
-      document.querySelectorAll("[data-version]").forEach(s => s.textContent = version);
-      document.getElementById("meta").textContent =
-        `Kostenlos · Windows 10 & 11 · Minecraft Java Edition`;
-    })
-    .catch(() => {
-      document.querySelectorAll("[data-version]").forEach(s => s.textContent = "Version");
-    });
-
-  if (VIRUSTOTAL_URL) {
-    document.getElementById("vt-link").href = VIRUSTOTAL_URL;
-    document.getElementById("vt-line").hidden = false;
-  }
-</script>
 </body>
 </html>
